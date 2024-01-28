@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import {
   Button,
   ScrollView,
@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -17,7 +18,10 @@ export default function App() {
   }
 
   function addGoalHandler() {
-    setGoals((currentGoals) => [...currentGoals, enteredGoalText]);
+    setGoals((currentGoals) => [
+      ...currentGoals,
+      { key: Math.random(1, 100000).toString(), text: enteredGoalText },
+    ]);
   }
   return (
     <View style={styles.container}>
@@ -32,9 +36,7 @@ export default function App() {
       <View style={styles.goalsContainer}>
         <ScrollView>
           {goals.map((goal) => (
-            <View key={goal} style={styles.goalItem}>
-              <Text style={styles.goalText}>{goal}</Text>
-            </View>
+            <GoalInput text={goal.text} />
           ))}
         </ScrollView>
       </View>
@@ -66,14 +68,5 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 5,
-  },
-  goalItem: {
-    margin: 8,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: "#5e0acc",
-  },
-  goalText: {
-    color: "#fff",
   },
 });
