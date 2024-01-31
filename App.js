@@ -13,7 +13,11 @@ export default function App() {
     ]);
   }
 
-  function deleteGoalHandler() {}
+  function deleteGoalHandler(id) {
+    setGoals((currentGoals) => {
+      return currentGoals.filter((goal) => goal.key !== id);
+    });
+  }
   return (
     <View style={styles.container}>
       <GoalInput onAddGoal={addGoalHandler} />
@@ -24,6 +28,7 @@ export default function App() {
               text={goal.text}
               key={goal.key}
               onGoalDelete={deleteGoalHandler}
+              id={goal.key}
             />
           ))}
         </ScrollView>
