@@ -1,12 +1,5 @@
-import { useId, useState } from "react";
-import {
-  Button,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { useState } from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
@@ -19,13 +12,19 @@ export default function App() {
       { key: Math.random().toString(), text: enteredGoalText },
     ]);
   }
+
+  function deleteGoalHandler() {}
   return (
     <View style={styles.container}>
       <GoalInput onAddGoal={addGoalHandler} />
       <View style={styles.goalsContainer}>
         <ScrollView>
           {goals.map((goal) => (
-            <GoalItem text={goal.text} />
+            <GoalItem
+              text={goal.text}
+              key={goal.key}
+              onGoalDelete={deleteGoalHandler}
+            />
           ))}
         </ScrollView>
       </View>
