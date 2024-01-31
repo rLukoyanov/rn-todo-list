@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Button, ScrollView, StyleSheet, View } from "react-native";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
 export default function App() {
+  const [modalIsVisible, setModalIsVisible] = useState(false);
   const [goals, setGoals] = useState([]);
+
+  function startAddGoalHandler() {
+    setModalIsVisible(true);
+  }
 
   function addGoalHandler(enteredGoalText) {
     setGoals((currentGoals) => [
@@ -20,7 +25,12 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button
+        title="add new goal"
+        color="#5e0acc"
+        onPress={startAddGoalHandler}
+      />
+      <GoalInput onAddGoal={addGoalHandler} visible={modalIsVisible} />
       <View style={styles.goalsContainer}>
         <ScrollView>
           {goals.map((goal) => (
