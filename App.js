@@ -25,6 +25,8 @@ export default function App() {
     setModalIsVisible(false);
   }
 
+  console.log("bla");
+
   function deleteGoalHandler(id) {
     setGoals((currentGoals) => {
       return currentGoals.filter((goal) => goal.key !== id);
