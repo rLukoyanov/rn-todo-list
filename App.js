@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Button, ScrollView, StyleSheet, View } from "react-native";
+import { StatusBar } from "expo-status-bar";
+
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
@@ -30,30 +32,33 @@ export default function App() {
     endAddGoalHandler();
   }
   return (
-    <View style={styles.container}>
-      <Button
-        title="add new goal"
-        color="#5e0acc"
-        onPress={startAddGoalHandler}
-      />
-      <GoalInput
-        onAddGoal={addGoalHandler}
-        onCancel={endAddGoalHandler}
-        visible={modalIsVisible}
-      />
-      <View style={styles.goalsContainer}>
-        <ScrollView>
-          {goals.map((goal) => (
-            <GoalItem
-              text={goal.text}
-              key={goal.key}
-              onGoalDelete={deleteGoalHandler}
-              id={goal.key}
-            />
-          ))}
-        </ScrollView>
+    <>
+      <StatusBar style="light" />
+      <View style={styles.container}>
+        <Button
+          title="add new goal"
+          color="#9561d9"
+          onPress={startAddGoalHandler}
+        />
+        <GoalInput
+          onAddGoal={addGoalHandler}
+          onCancel={endAddGoalHandler}
+          visible={modalIsVisible}
+        />
+        <View style={styles.goalsContainer}>
+          <ScrollView>
+            {goals.map((goal) => (
+              <GoalItem
+                text={goal.text}
+                key={goal.key}
+                onGoalDelete={deleteGoalHandler}
+                id={goal.key}
+              />
+            ))}
+          </ScrollView>
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
