@@ -11,6 +11,10 @@ export default function App() {
     setModalIsVisible(true);
   }
 
+  function endAddGoalHandler() {
+    setModalIsVisible(false);
+  }
+
   function addGoalHandler(enteredGoalText) {
     setGoals((currentGoals) => [
       ...currentGoals,
@@ -22,6 +26,7 @@ export default function App() {
     setGoals((currentGoals) => {
       return currentGoals.filter((goal) => goal.key !== id);
     });
+    endAddGoalHandler();
   }
   return (
     <View style={styles.container}>
@@ -30,7 +35,11 @@ export default function App() {
         color="#5e0acc"
         onPress={startAddGoalHandler}
       />
-      <GoalInput onAddGoal={addGoalHandler} visible={modalIsVisible} />
+      <GoalInput
+        onAddGoal={addGoalHandler}
+        onCancel={endAddGoalHandler}
+        visible={modalIsVisible}
+      />
       <View style={styles.goalsContainer}>
         <ScrollView>
           {goals.map((goal) => (
