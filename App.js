@@ -20,6 +20,7 @@ export default function App() {
       ...currentGoals,
       { key: Math.random().toString(), text: enteredGoalText },
     ]);
+    setModalIsVisible(false);
   }
 
   function deleteGoalHandler(id) {
